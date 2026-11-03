@@ -1,0 +1,32 @@
+# Local test server. Mirrors what the cloud server will run.
+# Usage (from this folder):  docker compose up      then connect to localhost:25565
+services:
+  # Serves ../pack over HTTP so the server can install it exactly like it will from GitHub.
+  pack:
+    image: nginx:1.27-alpine
+    volumes:
+      - ../pack:/usr/share/nginx/html:ro
+
+  mc:
+    image: itzg/minecraft-server:java25
+    depends_on: [pack]
+    ports:
+      - "25565:25565"       # Minecraft (Java)
+      - "24454:24454/udp"   # Simple Voice Chat
+    environment:
+      EULA: "TRUE"
+      TYPE: FABRIC
+      VERSION: "26.3"
+      FABRIC_LOADER_VERSION: "0.20.1"
+      PACKWIZ_URL: http://pack/pack.toml   # in the cloud this becomes the GitHub Pages URL
+      MEMORY: 4G                            # cloud server will use ~10G
+      USE_AIKAR_FLAGS: "true"
+      MOTD: "Friends SMP (local test)"
+      DIFFICULTY: normal
+      VIEW_DISTANCE: 10
+      SIMULATION_DISTANCE: 8
+      ENABLE_WHITELIST: "false"             # turned on in the cloud
+    volumes:
+      - ./data:/data
+    tty: true
+    stdin_open: true
