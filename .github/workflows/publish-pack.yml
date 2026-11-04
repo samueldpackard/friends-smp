@@ -1,0 +1,42 @@
+# Publishes pack/ to GitHub Pages, so pack.toml is served at
+# https://<user>.github.io/<repo>/pack.toml for the server and players' launchers.
+name: Publish pack
+
+on:
+  push:
+    branches: [main]
+    paths: ["pack/**", ".github/workflows/publish-pack.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      # Fail the deploy if someone hand-edited a .toml without running `packwiz refresh`.
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: Check pack index is up to date
+        run: |
+          go install github.com/packwiz/packwiz@latest
+          cd pack && ~/go/bin/packwiz refresh --build
+          git diff --exit-code -- . || { echo "Run 'packwiz refresh' and commit."; exit 1; }
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: pack
+      - id: deployment
+        uses: actions/deploy-pages@v4
