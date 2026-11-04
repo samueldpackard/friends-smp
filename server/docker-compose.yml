@@ -1,15 +1,16 @@
 # Local test server. Mirrors what the cloud server will run.
 # Usage (from this folder):  docker compose up      then connect to localhost:25565
 services:
-  # Serves ../pack over HTTP so the server can install it exactly like it will from GitHub.
+  # Serves ../pack locally, for testing pack changes before pushing them.
+  # Use it with:  PACKWIZ_URL=http://pack/pack.toml docker compose --profile local-pack up -d
   pack:
     image: nginx:1.27-alpine
+    profiles: [local-pack]
     volumes:
       - ../pack:/usr/share/nginx/html:ro
 
   mc:
     image: itzg/minecraft-server:java25
-    depends_on: [pack]
     ports:
       - "25565:25565"       # Minecraft (Java)
       - "24454:24454/udp"   # Simple Voice Chat
@@ -18,7 +19,8 @@ services:
       TYPE: FABRIC
       VERSION: "26.3"
       FABRIC_LOADER_VERSION: "0.20.1"
-      PACKWIZ_URL: http://pack/pack.toml   # in the cloud this becomes the GitHub Pages URL
+      # Published from pack/ by .github/workflows/publish-pack.yml
+      PACKWIZ_URL: ${PACKWIZ_URL:-https://samueldpackard.github.io/friends-smp/pack.toml}
       MEMORY: 4G                            # cloud server will use ~10G
       USE_AIKAR_FLAGS: "true"
       MOTD: "Friends SMP (local test)"

@@ -1,5 +1,8 @@
 # Friends SMP — modded Java Minecraft server
 
+- **GitHub repo (public):** https://github.com/samueldpackard/friends-smp
+- **Pack URL** (server and launchers read this): https://samueldpackard.github.io/friends-smp/pack.toml
+
 A private, modded **Java Edition** Minecraft server for ~0–15 friends, hosted in the cloud,
 costing money only while people are playing. This README is the handoff doc: a new Claude Code
 session (or a human) should be able to read it and continue.
@@ -24,6 +27,8 @@ session (or a human) should be able to read it and continue.
 pack/                 packwiz modpack (the mod list). Edit with the packwiz CLI.
   pack.toml           MC version, loader version
   mods/*.pw.toml      one file per mod; `side` = client | server | both
+.github/workflows/
+  publish-pack.yml    on push to main (pack/**): checks the index is refreshed, publishes pack/ to GitHub Pages
 server/
   docker-compose.yml  local test server (same Docker image the cloud will use)
   data/               world + server files (git-ignored)
@@ -53,8 +58,13 @@ packwiz remove <slug>
 packwiz update --all
 packwiz refresh            # always run after hand-editing any .toml
 
-# run the local test server (inside server/)
+# publish a pack change: commit + push; GitHub Actions republishes in ~1 min
+git add -A && git commit -m "Add <mod>" && git push
+
+# run the local test server (inside server/) — installs from the published pack URL
 docker compose up -d
+# ...or test unpushed pack changes, served from your local pack/ folder:
+PACKWIZ_URL=http://pack/pack.toml docker compose --profile local-pack up -d
 docker compose logs -f mc      # wait for "Done (...)! For help, type help"
 docker attach server-mc-1      # server console; detach with Ctrl-P Ctrl-Q
 docker compose down
@@ -67,15 +77,17 @@ Connect from Minecraft 26.3 (Fabric, with the client mods) to `localhost:25565`.
 - **Apple-silicon Docker + `USE_MEOWICE_FLAGS` crashes the JVM** (Temurin 25 C2 compiler error,
   `barrierSetAssembler_aarch64.cpp`). We use `USE_AIKAR_FLAGS` instead. Re-test MeowIce on the
   cloud VM later only if performance needs it.
+- Docker Desktop quits when the Mac sleeps sometimes; `open -a Docker` restarts it.
+- GitHub CLI login (`gh`) uses the device-code flow; the token needs the `workflow` scope to push
+  `.github/workflows/*` (granted 2026-11-03). If a push is rejected for that: `gh auth refresh -s workflow`.
 - Run `packwiz refresh` after editing any `.pw.toml` by hand, or hashes won't match and installs fail.
 
 ## Roadmap
 
 1. ✅ **Pack + local test server.** The server boots on 26.3 with all mods (88 including Fabric API modules).
    - [ ] Samuel joins `localhost:25565` from Prism to confirm the client side.
-2. **Publish the pack.** Create a GitHub repo, publish `pack/` via GitHub Pages so the URL
-   `https://<user>.github.io/<repo>/pack.toml` works for the server and for Prism.
-   (`gh` CLI is installed; run `gh auth login` first.)
+2. ✅ **Publish the pack.** Public repo + GitHub Pages via Actions. The local server installs from
+   the public URL and boots with all mods.
 3. **Player setup guide.** Prism Launcher + packwiz-installer-bootstrap pre-launch command;
    one page for friends.
 4. **Custom mod template.** Fabric mod repo + GitHub Actions release build → `packwiz url add`.
