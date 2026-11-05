@@ -1,0 +1,30 @@
+#!/bin/bash
+# First-boot setup for the always-on gateway (Amazon Linux 2023, arm64).
+# The gateway binary is fetched from S3 on every service start, so deploying a new
+# version is: `tofu apply`, then restart the service (or reboot the gateway).
+set -euxo pipefail
+
+cat > /etc/systemd/system/mc-gateway.service <<'EOF'
+[Unit]
+Description=Minecraft gateway (wake-on-join proxy)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStartPre=+/usr/bin/aws s3 cp --only-show-errors s3://${bucket}/gateway/gateway-linux-arm64 /usr/local/bin/mc-gateway
+ExecStartPre=+/usr/bin/chmod 755 /usr/local/bin/mc-gateway
+ExecStart=/usr/local/bin/mc-gateway
+Environment=AWS_REGION=${region}
+Environment=BACKEND_INSTANCE_ID=${backend_instance_id}
+Environment=BACKEND_IP=${backend_ip}
+Environment=MAX_PLAYERS=${max_players}
+DynamicUser=yes
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now mc-gateway.service

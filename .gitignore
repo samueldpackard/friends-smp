@@ -1,2 +1,6 @@
 data/
 .DS_Store
+gateway/dist/
+infra/.terraform/
+infra/*.tfstate*
+infra/.terraform.lock.hcl.bak

@@ -1,0 +1,63 @@
+#!/bin/bash
+# First-boot setup for the main Minecraft server (Amazon Linux 2023, arm64).
+# Config and scripts are re-synced from S3 on every boot by minecraft.service,
+# so changing them only needs `tofu apply` + a restart, not a new VM.
+set -euxo pipefail
+
+dnf install -y docker
+systemctl enable --now docker
+
+# --- World disk (separate EBS volume, survives VM replacement) ---
+dev=/dev/disk/by-id/nvme-Amazon_Elastic_Block_Store_${replace(data_volume_id, "-", "")}
+for i in $(seq 1 60); do [[ -e $dev ]] && break; sleep 5; done
+blkid "$dev" || mkfs.xfs "$dev"
+mkdir -p /opt/mc/data
+echo "UUID=$(blkid -s UUID -o value "$dev") /opt/mc/data xfs defaults,nofail 0 2" >> /etc/fstab
+mount -a
+
+cat > /etc/systemd/system/minecraft.service <<'EOF'
+[Unit]
+Description=Minecraft server (itzg/minecraft-server)
+After=docker.service network-online.target
+Requires=docker.service
+Wants=network-online.target
+RequiresMountsFor=/opt/mc/data
+
+[Service]
+ExecStartPre=/usr/bin/aws s3 sync --only-show-errors s3://${bucket}/config/ /opt/mc/
+ExecStartPre=/usr/bin/chmod +x /opt/mc/idle-check.sh /opt/mc/backup.sh
+ExecStartPre=-/usr/bin/docker rm -f mc
+ExecStartPre=-/usr/bin/docker pull ${image}
+ExecStart=/usr/bin/docker run --rm --name mc -p 25565:25565 -p 24454:24454/udp -v /opt/mc/data:/data --env-file /opt/mc/mc.env ${image}
+ExecStop=/usr/bin/docker stop -t 120 mc
+TimeoutStopSec=180
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat > /etc/systemd/system/mc-idle-check.service <<'EOF'
+[Unit]
+Description=Put the server to sleep when nobody is playing
+
+[Service]
+Type=oneshot
+ExecStart=/opt/mc/idle-check.sh
+EOF
+
+cat > /etc/systemd/system/mc-idle-check.timer <<'EOF'
+[Unit]
+Description=Check for an idle Minecraft server every minute
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=1min
+
+[Install]
+WantedBy=timers.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now minecraft.service mc-idle-check.timer
