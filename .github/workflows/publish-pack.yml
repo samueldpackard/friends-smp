@@ -1,11 +1,12 @@
 # Publishes pack/ to GitHub Pages, so pack.toml is served at
-# https://<user>.github.io/<repo>/pack.toml for the server and players' launchers.
+# https://<user>.github.io/<repo>/pack.toml for the server and players' launchers,
+# plus the one-click Prism Launcher instance at .../Friends-SMP.zip.
 name: Publish pack
 
 on:
   push:
     branches: [main]
-    paths: ["pack/**", ".github/workflows/publish-pack.yml"]
+    paths: ["pack/**", "launcher/**", ".github/workflows/publish-pack.yml"]
   workflow_dispatch:
 
 permissions:
@@ -34,9 +35,14 @@ jobs:
           go install github.com/packwiz/packwiz@latest
           cd pack && ~/go/bin/packwiz refresh --build
           git diff --exit-code -- . || { echo "Run 'packwiz refresh' and commit."; exit 1; }
+      - name: Assemble site
+        run: |
+          mkdir _site
+          cp -R pack/. _site/
+          launcher/build-prism-instance.sh _site/Friends-SMP.zip
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: pack
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
