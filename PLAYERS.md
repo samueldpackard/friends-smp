@@ -3,7 +3,8 @@
 About 5 minutes, once. After that you just click **Launch**, and new or updated mods download
 by themselves.
 
-**You need:** Minecraft: Java Edition on your Microsoft account (Windows or Mac).
+**You need:** Minecraft: Java Edition on your Microsoft account (Windows or Mac), and Samuel
+needs to add your Minecraft username to the server's whitelist. Send it to him first!
 
 ## 1. Install Prism Launcher
 
@@ -35,7 +36,11 @@ A **Friends-SMP** instance appears in Prism's main window.
 Click **Friends-SMP** once, then click **Launch** on the right. The first time, a small window downloads the mods
 (about a minute). Then Minecraft starts.
 
-In Minecraft: **Multiplayer → Add Server** and enter the server address Samuel gives you.
+In Minecraft: **Multiplayer → Add Server**, Server Address: **`35.160.13.72`**.
+
+**If the server is asleep** (the list says "asleep - join to wake it up"), just click Join. You'll
+see "Waking up the server!". Wait about a minute and join again. The server goes back to sleep
+by itself 15 minutes after the last person leaves, so we only pay while someone is playing.
 
 That's it. Always launch from Prism, from the **Friends-SMP** instance. Each launch checks for
 mod updates, so you're always in sync with the server.

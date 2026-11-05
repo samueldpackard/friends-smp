@@ -1,5 +1,6 @@
 # Friends SMP — modded Java Minecraft server
 
+- **Server address (players type this):** `35.160.13.72` (gateway's static IP; never changes)
 - **GitHub repo (public):** https://github.com/samueldpackard/friends-smp
 - **Pack URL** (server and launchers read this): https://samueldpackard.github.io/friends-smp/pack.toml
 - **One-click Prism instance** (friends import this): https://samueldpackard.github.io/friends-smp/Friends-SMP.zip
@@ -39,7 +40,10 @@ PLAYERS.md            step-by-step guide for friends
 server/
   docker-compose.yml  local test server (same Docker image the cloud will use)
   data/               world + server files (git-ignored)
-infra/                (planned) AWS infrastructure as code
+gateway/              Go source for the always-on wake-on-join proxy (game TCP + voice UDP)
+infra/                AWS infrastructure (OpenTofu). deploy.sh builds the gateway + applies.
+  files/              server/gateway first-boot scripts, mc.env template, idle-check, backup
+tools/mc-knock.py     pretend to join: wakes a sleeping server without opening Minecraft
 README.md             this file
 ```
 
@@ -79,6 +83,57 @@ docker compose down
 
 Connect from Minecraft 26.3 (Fabric, with the client mods) to `localhost:25565`.
 
+## Running the cloud server
+
+How it works: players connect to the **gateway** (t4g.nano, static IP, always on). If the
+**main server** (m8g.xlarge, 4 vCPU / 16 GB, Minecraft gets 12 GB) is running, the gateway
+proxies the game (TCP 25565) and voice chat (UDP 24454) to it over the private network. If it's
+asleep, the server list shows "asleep - join to wake it up"; a join attempt starts the VM and
+tells the player to rejoin in ~1 minute. The main server checks every minute and, after
+**15 min with nobody online**, stops Minecraft, backs up to S3, and powers off.
+
+AWS access: account `829135570053`, region `us-west-2` (Oregon). The CLI profile is
+`friends-smp` (IAM Identity Center user `samueldpackard`, AdministratorAccess), configured in
+`~/.aws/config`. Sessions expire; log in again with the device-code flow:
+
+```bash
+aws sso login --profile friends-smp --use-device-code --no-browser   # give Samuel the URL + code
+export AWS_PROFILE=friends-smp
+```
+
+```bash
+# change infra or server settings (whitelist, ops, memory, idle time: infra/variables.tf)
+infra/deploy.sh plan        # preview
+infra/deploy.sh             # apply (asks to confirm)
+# mc.env/scripts live in S3 and are re-read at every server boot, so most setting changes
+# take effect next time the server wakes up. Gateway changes: restart its service (below).
+
+# wake the server without Minecraft
+tools/mc-knock.py
+
+# server state / start / stop
+aws ec2 describe-instances --instance-ids i-0737b6ab11af34f5c --query 'Reservations[0].Instances[0].State.Name'
+aws ec2 start-instances --instance-ids i-0737b6ab11af34f5c
+
+# admin shell on a VM (no SSH; needs the Session Manager plugin: brew install --cask session-manager-plugin)
+aws ssm start-session --target i-0737b6ab11af34f5c   # main server
+aws ssm start-session --target i-08edfcde5c8a0cfc8   # gateway
+#   on the server:  journalctl -u minecraft -f        (game log)
+#                   sudo docker exec -it mc rcon-cli  (server console: /list, /op, /whitelist ...)
+#                   journalctl -t mc-idle -t mc-backup (sleep/backup log)
+#   on the gateway: journalctl -u mc-gateway -f ;  sudo systemctl restart mc-gateway
+
+# backups
+aws s3 ls s3://friends-smp-829135570053/backups/ --recursive
+```
+
+Restoring a backup: stop the server (`sudo systemctl stop minecraft` in an SSM session), clear
+`/opt/mc/data/world*`, `aws s3 cp` the backup down, `tar -xzf` it into `/opt/mc/data`, start again.
+
+**OpenTofu state** (`infra/terraform.tfstate`) is only on Samuel's Mac (git-ignored). Don't lose
+it; moving it to S3 is a good small follow-up. The world disk has `prevent_destroy`, so
+`tofu destroy` refuses to delete it.
+
 ## Gotchas found so far
 
 - **Apple-silicon Docker + `USE_MEOWICE_FLAGS` crashes the JVM** (Temurin 25 C2 compiler error,
@@ -89,6 +144,11 @@ Connect from Minecraft 26.3 (Fabric, with the client mods) to `localhost:25565`.
 - Docker Desktop quits when the Mac sleeps sometimes; `open -a Docker` restarts it.
 - GitHub CLI login (`gh`) uses the device-code flow; the token needs the `workflow` scope to push
   `.github/workflows/*` (granted 2026-11-03). If a push is rejected for that: `gh auth refresh -s workflow`.
+- New AWS accounts are limited to 5 vCPUs of running instances; we need 6. Raised to 16
+  (approved 2026-11-05, Service Quotas `L-1216C47A`).
+- Claude Code's auto mode blocks `tofu apply` until Samuel explicitly approves it in chat.
+- The built-in Claude browser has no Bitwarden; Samuel approves AWS/GitHub device codes in his
+  regular browser.
 - Run `packwiz refresh` after editing any `.pw.toml` by hand, or hashes won't match and installs fail.
 
 ## Roadmap
@@ -100,28 +160,29 @@ Connect from Minecraft 26.3 (Fabric, with the client mods) to `localhost:25565`.
 3. ✅ **Player setup.** One-click Prism instance + [PLAYERS.md](PLAYERS.md), tested end-to-end on
    Samuel's Mac (client got the 16 client/both mods; server-only mods correctly excluded).
    - [ ] Test on a Windows PC when a friend is available.
-   - [ ] Once the cloud server exists, put its address in PLAYERS.md (and optionally pre-fill
-     the server list in the instance zip).
+   - ✅ Cloud address in PLAYERS.md. (Optional: pre-fill the server list in the instance zip.)
    - Note: changing the Minecraft/Fabric version in pack.toml updates the zip, but existing
      instances keep their old version. Friends would re-import the zip (worlds live on the server,
      so nothing is lost) — or test whether packwiz-installer updates mmc-pack.json by itself.
 4. **Custom mod template.** Fabric mod repo + GitHub Actions release build → `packwiz url add`.
-5. **AWS infrastructure** (`infra/`):
-   - Gateway: tiny always-on instance (≈$4–6/mo). Listens on 25565; when the main server is off
-     and someone connects, it starts the main server and shows "starting, rejoin in ~1 min".
-   - Main server: ~16 GB RAM instance, Docker + itzg image with `PACKWIZ_URL`, auto-stops after
-     ~15 min empty. World on persistent EBS volume; nightly backups to S3.
-   - Whitelist on, Simple Voice Chat UDP 24454 open.
+5. ✅ **AWS infrastructure** deployed 2026-11-05 (see "Running the cloud server").
+   - [ ] Add friends' Minecraft usernames to `whitelist` in infra/variables.tf, then deploy.
+   - [ ] Pre-generate the world with Chunky (`/chunky radius 3000`, `/chunky start`) to cut lag.
+   - [ ] Optional: a domain name instead of the raw IP; move tofu state to S3.
 6. **Friend onboarding + first game night.**
 
-## AWS billing (read before step 5)
+## AWS billing
 
-Do these **before** creating any infrastructure:
-1. Create an AWS account with your own email and a credit card. Turn on MFA for the root user,
-   then create an IAM user (or IAM Identity Center user) for day-to-day use. Never use root keys.
-2. **Billing → Budgets:** create a monthly cost budget (e.g. $30) with email alerts at 50%, 80%,
-   100% actual and 100% forecasted.
-3. **Billing preferences:** turn on Free Tier usage alerts and Cost Explorer.
-4. Expected cost: gateway ≈ $5/mo + main server ≈ $0.15–0.25 per hour played + a few $ for
-   disk/backups. Roughly **$15–25/mo** at 40–60 play hours; less in quiet months.
-5. Tag every resource with `project=friends-smp` so Cost Explorer can show this project alone.
+Set up 2026-11-05:
+- Root login has MFA. Day-to-day/CLI access is the IAM Identity Center user `samueldpackard`.
+- Budget **"Friends SMP monthly" = $30**, emails samueldpackard@gmail.com at 85% / 100% actual
+  and 100% forecast. It measures usage before credits, so it reflects true cost.
+- Free Tier usage alerts on (root email). CloudWatch billing alerts intentionally left off.
+- **Credits: $100**, expiring 2027-11-05. AWS may grant up to $100 more for starter activities.
+- All resources tagged `project=friends-smp`. To filter Cost Explorer by it, activate the tag
+  once under Billing → Cost allocation tags (it appears ~24 h after the first tagged resource).
+
+Expected cost (on-demand, us-west-2): gateway t4g.nano ≈ $3/mo + its public IPv4 ≈ $3.65/mo +
+world disk 30 GB ≈ $2.40/mo + gateway disk ≈ $0.65/mo + S3 backups < $1/mo ≈ **$10/mo base**,
+plus main server m8g.xlarge **$0.1795/hr** + its IPv4 $0.005/hr + 20 GB root disk ≈ $1.60/mo.
+≈ $20/mo at 50 play hours. Data out to players is covered by AWS's 100 GB/mo free allowance.
