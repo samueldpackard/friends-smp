@@ -47,15 +47,20 @@ tools/mc-knock.py     pretend to join: wakes a sleeping server without opening M
 README.md             this file
 ```
 
-## Current mod list (pack v0.1.0)
+## Current mod list
 
-- **Both sides:** Fabric API, Lithium, FerriteCore, Spark, No Chat Reports, AppleSkin, Jade,
-  Xaero's Minimap, Xaero's World Map, Simple Voice Chat (needs UDP port 24454)
-- **Server only:** Chunky (world pre-generation), Ledger (block/grief logging) + its deps
-  (Fabric Language Kotlin, Placeholder API)
-- **Client only:** Sodium, Iris (shaders), Entity Culling, ImmediatelyFast, Mod Menu
+- **Both sides:** Fabric API, Fabric Language Kotlin, Lithium, FerriteCore, Spark,
+  No Chat Reports, AppleSkin, Jade
+- **Server only:** Chunky (world pre-generation), Ledger (block/grief logging) + Placeholder API
+- **Client only:** Sodium, Iris (shaders), Entity Culling, ImmediatelyFast, Mod Menu,
+  Inventory Profiles Next + libIPN (carried over from the old 1.21.10 server)
 
-Dropped: ScalableLux (alpha-quality on 26.3).
+Dropped: ScalableLux (alpha-quality on 26.3); Xaero's Minimap/World Map and Simple Voice Chat
+(Samuel's call, 2026-11-05 — the gateway still relays UDP 24454 if voice chat comes back);
+from the old server: Custom Portals, LavaSponge, YACL (only needed by those).
+
+Whitelist/ops: `WHITELIST`/`OPS` from infra/variables.tf are **merged** into the server's lists
+on every boot, so in-game `/whitelist add <name>` and `/op <name>` also stick.
 
 ## Common tasks
 
@@ -166,7 +171,7 @@ it; moving it to S3 is a good small follow-up. The world disk has `prevent_destr
      so nothing is lost) — or test whether packwiz-installer updates mmc-pack.json by itself.
 4. **Custom mod template.** Fabric mod repo + GitHub Actions release build → `packwiz url add`.
 5. ✅ **AWS infrastructure** deployed 2026-11-05 (see "Running the cloud server").
-   - [ ] Add friends' Minecraft usernames to `whitelist` in infra/variables.tf, then deploy.
+   - [ ] Add friends: in-game `/whitelist add <name>` (sticks), or `whitelist` in infra/variables.tf.
    - [ ] Pre-generate the world with Chunky (`/chunky radius 3000`, `/chunky start`) to cut lag.
    - [ ] Optional: a domain name instead of the raw IP; move tofu state to S3.
 6. **Friend onboarding + first game night.**

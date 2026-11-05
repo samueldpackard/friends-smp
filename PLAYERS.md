@@ -47,9 +47,9 @@ mod updates, so you're always in sync with the server.
 
 ## Extras that are already included
 
-- **Minimap and world map:** press **M** for the full map.
-- **Voice chat:** press **V** for settings; by default you talk by holding **Caps Lock**.
-  Nearby players hear you.
+- **Inventory sorting** (Inventory Profiles Next): press **R** to sort a chest or your inventory.
+  Its settings are under Mod Menu (Mods button on the title screen).
+- **Food info** (AppleSkin) and **what am I looking at** (Jade) tooltips.
 - **Shaders:** Options → Video Settings → Shader Packs (add your own shader packs there).
 
 ## Problems?
