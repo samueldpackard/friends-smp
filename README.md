@@ -2,6 +2,8 @@
 
 - **GitHub repo (public):** https://github.com/samueldpackard/friends-smp
 - **Pack URL** (server and launchers read this): https://samueldpackard.github.io/friends-smp/pack.toml
+- **One-click Prism instance** (friends import this): https://samueldpackard.github.io/friends-smp/Friends-SMP.zip
+- **Friend guide:** [PLAYERS.md](PLAYERS.md)
 
 A private, modded **Java Edition** Minecraft server for ~0–15 friends, hosted in the cloud,
 costing money only while people are playing. This README is the handoff doc: a new Claude Code
@@ -28,7 +30,12 @@ pack/                 packwiz modpack (the mod list). Edit with the packwiz CLI.
   pack.toml           MC version, loader version
   mods/*.pw.toml      one file per mod; `side` = client | server | both
 .github/workflows/
-  publish-pack.yml    on push to main (pack/**): checks the index is refreshed, publishes pack/ to GitHub Pages
+  publish-pack.yml    on push to main (pack/** or launcher/**): checks the index is refreshed,
+                      publishes pack/ + the Prism instance zip to GitHub Pages
+launcher/
+  build-prism-instance.sh  builds Friends-SMP.zip (MC/Fabric versions read from pack.toml;
+                      pre-launch runs packwiz-installer-bootstrap so mods sync every launch)
+PLAYERS.md            step-by-step guide for friends
 server/
   docker-compose.yml  local test server (same Docker image the cloud will use)
   data/               world + server files (git-ignored)
@@ -77,6 +84,8 @@ Connect from Minecraft 26.3 (Fabric, with the client mods) to `localhost:25565`.
 - **Apple-silicon Docker + `USE_MEOWICE_FLAGS` crashes the JVM** (Temurin 25 C2 compiler error,
   `barrierSetAssembler_aarch64.cpp`). We use `USE_AIKAR_FLAGS` instead. Re-test MeowIce on the
   cloud VM later only if performance needs it.
+- On first launch Prism shows a setup wizard; a `--import <url>` started before the wizard
+  completes pops up afterwards (that's what happened on Samuel's Mac — it worked fine).
 - Docker Desktop quits when the Mac sleeps sometimes; `open -a Docker` restarts it.
 - GitHub CLI login (`gh`) uses the device-code flow; the token needs the `workflow` scope to push
   `.github/workflows/*` (granted 2026-11-03). If a push is rejected for that: `gh auth refresh -s workflow`.
@@ -85,11 +94,17 @@ Connect from Minecraft 26.3 (Fabric, with the client mods) to `localhost:25565`.
 ## Roadmap
 
 1. ✅ **Pack + local test server.** The server boots on 26.3 with all mods (88 including Fabric API modules).
-   - [ ] Samuel joins `localhost:25565` from Prism to confirm the client side.
+   - ✅ Samuel joined `localhost` from Prism (2026-11-04); voice chat connected.
 2. ✅ **Publish the pack.** Public repo + GitHub Pages via Actions. The local server installs from
    the public URL and boots with all mods.
-3. **Player setup guide.** Prism Launcher + packwiz-installer-bootstrap pre-launch command;
-   one page for friends.
+3. ✅ **Player setup.** One-click Prism instance + [PLAYERS.md](PLAYERS.md), tested end-to-end on
+   Samuel's Mac (client got the 16 client/both mods; server-only mods correctly excluded).
+   - [ ] Test on a Windows PC when a friend is available.
+   - [ ] Once the cloud server exists, put its address in PLAYERS.md (and optionally pre-fill
+     the server list in the instance zip).
+   - Note: changing the Minecraft/Fabric version in pack.toml updates the zip, but existing
+     instances keep their old version. Friends would re-import the zip (worlds live on the server,
+     so nothing is lost) — or test whether packwiz-installer updates mmc-pack.json by itself.
 4. **Custom mod template.** Fabric mod repo + GitHub Actions release build → `packwiz url add`.
 5. **AWS infrastructure** (`infra/`):
    - Gateway: tiny always-on instance (≈$4–6/mo). Listens on 25565; when the main server is off
