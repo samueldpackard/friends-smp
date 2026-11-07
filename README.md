@@ -57,6 +57,10 @@ README.md             this file
 - **Server only:** Chunky (world pre-generation), Ledger (block/grief logging) + Placeholder API
 - **Client only:** Sodium, Iris (shaders), Entity Culling, ImmediatelyFast, Mod Menu,
   Inventory Profiles Next + libIPN (carried over from the old 1.21.10 server)
+- **Client extras, off by default (each player turns them on):** shader pack Complementary
+  Reimagined (`pack/shaderpacks/`); Continuity (connected-textures mod) + resource pack Clean
+  Connected Glass (`pack/resourcepacks/`; listed for 26.2 on Modrinth, file says 1.20–26.x).
+  packwiz marks Modrinth shader/resource packs `side = "both"`; we set them to `client` by hand.
 - **Our own:** Classic Music (client; the server skips it via `environment: client`).
   Everyday overworld music, title screen and creative play only C418's Volume Alpha/Beta tracks;
   every everyday biome gets all 12 survival tracks with equal chances, like the old game.
