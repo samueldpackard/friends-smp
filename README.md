@@ -155,6 +155,10 @@ it; moving it to S3 is a good small follow-up. The world disk has `prevent_destr
 - The built-in Claude browser has no Bitwarden; Samuel approves AWS/GitHub device codes in his
   regular browser.
 - Run `packwiz refresh` after editing any `.pw.toml` by hand, or hashes won't match and installs fail.
+- **World gamerules live in the world save, not in config.** Set on the cloud server (2026-11-06):
+  `gamerule players_sleeping_percentage 50` (half the players sleeping skips the night). In 26.x
+  gamerule names are snake_case; the old camelCase names are rejected. Spawn protection is
+  `SPAWN_PROTECTION=0` in `infra/files/mc.env.tftpl`.
 
 ## Roadmap
 
