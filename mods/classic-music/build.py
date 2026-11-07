@@ -13,7 +13,7 @@ Re-run after a Minecraft update, then `cd pack && packwiz refresh`.
 import json, sys, zipfile
 from pathlib import Path
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 HERE = Path(__file__).resolve().parent
 OUT = HERE.parent.parent / "pack" / "mods" / "classic-music.jar"
 
@@ -54,9 +54,13 @@ def main(vanilla_path):
     for event in CLASSIC_EVENTS:
         if event not in vanilla:
             sys.exit(f"{event} is not in this Minecraft version's sounds.json; update CLASSIC_EVENTS")
-        kept = [e for e in vanilla[event]["sounds"] if track(e) in C418]
-        # A biome with no C418 tracks at all (e.g. swamp) gets the regular C418 overworld set.
-        sounds[event] = {"replace": True, "sounds": kept or game_c418}
+        if event.startswith("music.overworld."):
+            # Like the old game: every C418 overworld track can play in every everyday biome,
+            # with equal chances (not just the subset Mojang later assigned to that biome).
+            kept = game_c418
+        else:
+            kept = [e for e in vanilla[event]["sounds"] if track(e) in C418]
+        sounds[event] = {"replace": True, "sounds": kept}
         print(f"{event}: {', '.join(track(e) for e in sounds[event]['sounds'])}")
 
     mod_json = {

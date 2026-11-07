@@ -58,7 +58,8 @@ README.md             this file
 - **Client only:** Sodium, Iris (shaders), Entity Culling, ImmediatelyFast, Mod Menu,
   Inventory Profiles Next + libIPN (carried over from the old 1.21.10 server)
 - **Our own:** Classic Music (client; the server skips it via `environment: client`).
-  Everyday overworld music, title screen and creative play only C418's Volume Alpha/Beta tracks.
+  Everyday overworld music, title screen and creative play only C418's Volume Alpha/Beta tracks;
+  every everyday biome gets all 12 survival tracks with equal chances, like the old game.
   Deep Dark, Lush/Dripstone/Sulfur Caves, Cherry Grove, the Nether, underwater and the End keep
   vanilla music. After a Minecraft update, rebuild it from the new vanilla sounds.json:
   find `minecraft/sounds.json`'s hash in Prism's `assets/indexes/<id>.json`, then

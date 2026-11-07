@@ -12,7 +12,7 @@ metafile = true
 
 [[files]]
 file = "mods/classic-music.jar"
-hash = "2cc74b32100d5731200a643e9a39c26ee309db5272e761f201210bae672059b6"
+hash = "0604cedc52c649b92084c1a1e09dbe397f55e2c89fa4588b753601ae78755091"
 
 [[files]]
 file = "mods/entityculling.pw.toml"
