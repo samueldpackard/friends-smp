@@ -30,6 +30,9 @@ session (or a human) should be able to read it and continue.
 pack/                 packwiz modpack (the mod list). Edit with the packwiz CLI.
   pack.toml           MC version, loader version
   mods/*.pw.toml      one file per mod; `side` = client | server | both
+  mods/classic-music.jar  our own mod, built by mods/classic-music/build.py (don't hand-edit)
+mods/                 source for our own (vibe-coded) mods
+  classic-music/      C418-only everyday music: a code-free sounds.json override
 .github/workflows/
   publish-pack.yml    on push to main (pack/** or launcher/**): checks the index is refreshed,
                       publishes pack/ + the Prism instance zip to GitHub Pages
@@ -54,6 +57,13 @@ README.md             this file
 - **Server only:** Chunky (world pre-generation), Ledger (block/grief logging) + Placeholder API
 - **Client only:** Sodium, Iris (shaders), Entity Culling, ImmediatelyFast, Mod Menu,
   Inventory Profiles Next + libIPN (carried over from the old 1.21.10 server)
+- **Our own:** Classic Music (client; the server skips it via `environment: client`).
+  Everyday overworld music, title screen and creative play only C418's Volume Alpha/Beta tracks.
+  Deep Dark, Lush/Dripstone/Sulfur Caves, Cherry Grove, the Nether, underwater and the End keep
+  vanilla music. After a Minecraft update, rebuild it from the new vanilla sounds.json:
+  find `minecraft/sounds.json`'s hash in Prism's `assets/indexes/<id>.json`, then
+  `mods/classic-music/build.py ~/Library/Application\ Support/PrismLauncher/assets/objects/<ab>/<hash>`
+  and `cd pack && packwiz refresh`.
 
 Dropped: ScalableLux (alpha-quality on 26.3); Xaero's Minimap/World Map and Simple Voice Chat
 (Samuel's call, 2026-11-05 — the gateway still relays UDP 24454 if voice chat comes back);
