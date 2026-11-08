@@ -52,6 +52,9 @@ mod updates, so you're always in sync with the server.
 - **Food info** (AppleSkin) and **what am I looking at** (Jade) tooltips.
 - **Classic music:** everyday music is C418's original soundtrack only. Caves, the Deep Dark,
   Cherry Groves and the Nether keep their own special music.
+- **Lava sponge** (Samuel's own mod): craft a sponge surrounded by 4 lava buckets (top, left,
+  right, bottom). Place it and it soaks up all lava within 7 blocks, and any lava that later
+  flows into it, then glows like a lamp. Dry a wet one by crafting it with packed ice.
 - **Shaders (off unless you turn them on):** Options → Video Settings → Shader Packs → pick
   **Complementary Reimagined** (prettier lighting, shadows, water and swaying plants; it still
   looks like Minecraft). Too slow? Its settings have presets from Potato to Ultra. Only one

@@ -60,6 +60,10 @@ hash = "6a9c2f3995f8bf6d9b5dc0f711f22665c3c0ad488b0f4f04cf423c6f1f305ba6"
 metafile = true
 
 [[files]]
+file = "mods/lavasponge.jar"
+hash = "0397851cfd3613157283ac7b8cac32077da0e6414d57f7afc45625f5f9ee28ef"
+
+[[files]]
 file = "mods/ledger.pw.toml"
 hash = "264b4030e5717d50ebd215bffeb2e5fa138dc255ed57cbd47f99fd0a69595af3"
 metafile = true

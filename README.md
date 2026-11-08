@@ -31,6 +31,7 @@ pack/                 packwiz modpack (the mod list). Edit with the packwiz CLI.
   pack.toml           MC version, loader version
   mods/*.pw.toml      one file per mod; `side` = client | server | both
   mods/classic-music.jar  our own mod, built by mods/classic-music/build.py (don't hand-edit)
+  mods/lavasponge.jar     Samuel's Lava Sponge mod, built from its own repo (see below)
 mods/                 source for our own (vibe-coded) mods
   classic-music/      C418-only everyday music: a code-free sounds.json override
 .github/workflows/
@@ -69,6 +70,13 @@ README.md             this file
   find `minecraft/sounds.json`'s hash in Prism's `assets/indexes/<id>.json`, then
   `mods/classic-music/build.py ~/Library/Application\ Support/PrismLauncher/assets/objects/<ab>/<hash>`
   and `cd pack && packwiz refresh`.
+
+- **Our own:** Lava Sponge (both sides; source: github.com/samueldpackard/Lava-Sponge-Minecraft-Mod,
+  checked out next to this repo). Sponge + 4 lava buckets; placing it removes lava in a 7-block
+  sphere (and lava that later flows against it) and it becomes a light-15 wet lava sponge; packed
+  ice dries it. No tick handlers, block entities or mixins, so it costs nothing until placed.
+  Update: bump versions in its gradle.properties, `./gradlew build`, copy
+  `build/libs/lavasponge-*.jar` to `pack/mods/lavasponge.jar`, `cd pack && packwiz refresh`.
 
 Dropped: ScalableLux (alpha-quality on 26.3); Xaero's Minimap/World Map and Simple Voice Chat
 (Samuel's call, 2026-11-05 — the gateway still relays UDP 24454 if voice chat comes back);
