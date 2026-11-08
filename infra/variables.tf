@@ -45,7 +45,11 @@ variable "max_players" {
 variable "whitelist" {
   description = "Minecraft usernames allowed to join."
   type        = list(string)
-  default     = ["FeelMyNub", "LJBALLER"]
+  default = [
+    "FeelMyNub", "LJBALLER", "fake_lemons", "professorsnake2", "Marsupialz", "carpefreedom",
+    "oddstar862", "djholler", "Gust_OfWind", "Darsupial", "squidyliddy10", "FadingCrane",
+    "phasmaphoo",
+  ]
 }
 
 variable "ops" {
