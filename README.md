@@ -170,7 +170,13 @@ it; moving it to S3 is a good small follow-up. The world disk has `prevent_destr
 - The built-in Claude browser has no Bitwarden; Samuel approves AWS/GitHub device codes in his
   regular browser.
 - Run `packwiz refresh` after editing any `.pw.toml` by hand, or hashes won't match and installs fail.
-- **World gamerules live in the world save, not in config.** Set on the cloud server (2026-11-06):
+- **The world seed is `SEED` in `infra/files/mc.env.tftpl`** (itzg's variable; `LEVEL_SEED` is
+  ignored). It only matters when a world is created. 2026-11-07: switched to seed
+  `4679553964949206045` (old-growth taiga at spawn). The first world (seed 6320080785774539080) is
+  kept on Samuel's Mac in `~/Documents/Minecraft Backups/Friends SMP old world 2026-11-07/` and as a
+  playable save in the Prism instance. To start another new world: stop the server, delete
+  `/opt/mc/data/world`, change `SEED`, start, then re-set the gamerules below.
+- **World gamerules live in the world save, not in config.** Set on the cloud server (2026-11-06, again on the new world 2026-11-07):
   `gamerule players_sleeping_percentage 50` (half the players sleeping skips the night). In 26.x
   gamerule names are snake_case; the old camelCase names are rejected. Spawn protection is
   `SPAWN_PROTECTION=0` in `infra/files/mc.env.tftpl`.
