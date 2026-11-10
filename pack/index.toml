@@ -1,6 +1,16 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/inventoryprofilesnext/inventoryprofiles.json"
+hash = "58dc839952fcb24eed0d467298ec2f1efc304f6e7928ee274ca3719e9b18a4e9"
+preserve = true
+
+[[files]]
+file = "config/jade/jade.json"
+hash = "d5cc2a7801b144fdde8d2699d0c68b401c13e35cd1e2c69f0786ac9a9400f45d"
+preserve = true
+
+[[files]]
 file = "mods/appleskin.pw.toml"
 hash = "ff675667f4c6924a9eaebc42dc2df5306dc5e8b005e931d9d8b73cebad67d5eb"
 metafile = true

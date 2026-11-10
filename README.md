@@ -32,6 +32,7 @@ pack/                 packwiz modpack (the mod list). Edit with the packwiz CLI.
   mods/*.pw.toml      one file per mod; `side` = client | server | both
   mods/classic-music.jar  our own mod, built by mods/classic-music/build.py (don't hand-edit)
   mods/lavasponge.jar     Samuel's Lava Sponge mod, built from its own repo (see below)
+  config/             default client mod settings (see "Default mod settings" below)
 mods/                 source for our own (vibe-coded) mods
   classic-music/      C418-only everyday music: a code-free sounds.json override
 .github/workflows/
@@ -77,6 +78,13 @@ README.md             this file
   ice dries it. No tick handlers, block entities or mixins, so it costs nothing until placed.
   Update: bump versions in its gradle.properties, `./gradlew build`, copy
   `build/libs/lavasponge-*.jar` to `pack/mods/lavasponge.jar`, `cd pack && packwiz refresh`.
+
+**Default mod settings** (`pack/config/`, copied from Samuel's own client 2026-11-09): Inventory
+Profiles Next has auto-refill of armor and refill-before-a-tool-breaks off; Jade doesn't show
+block tooltips (entities still get them). Both files are `preserve = true` in `index.toml`, so
+packwiz only writes them for a player who doesn't have them yet and never overwrites a player's
+own changes. To change a default: edit the file, `cd pack && packwiz refresh`, and check that the
+`preserve = true` lines are still in `index.toml`. Players who already have the file keep theirs.
 
 Dropped: ScalableLux (alpha-quality on 26.3); Xaero's Minimap/World Map and Simple Voice Chat
 (Samuel's call, 2026-11-05 — the gateway still relays UDP 24454 if voice chat comes back);
