@@ -109,6 +109,10 @@ hash = "acb3c6900a0808dafb0f059abe4cfe1b512255802e446a55149cb734f3fe9556"
 metafile = true
 
 [[files]]
+file = "mods/sleds.jar"
+hash = "2a0554e597a9b5c1f497f97b3106c6aaa6a55da48f309860baeaf2abecc1023d"
+
+[[files]]
 file = "mods/sodium.pw.toml"
 hash = "0bf314c578473659bd89915114cac8e60994988f405218726a48d35b06e9316c"
 metafile = true

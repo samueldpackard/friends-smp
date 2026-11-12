@@ -32,6 +32,7 @@ pack/                 packwiz modpack (the mod list). Edit with the packwiz CLI.
   mods/*.pw.toml      one file per mod; `side` = client | server | both
   mods/classic-music.jar  our own mod, built by mods/classic-music/build.py (don't hand-edit)
   mods/lavasponge.jar     Samuel's Lava Sponge mod, built from its own repo (see below)
+  mods/sleds.jar          Samuel's Sleds mod, built from its own repo (see below)
   config/             default client mod settings (see "Default mod settings" below)
 mods/                 source for our own (vibe-coded) mods
   classic-music/      C418-only everyday music: a code-free sounds.json override
@@ -78,6 +79,13 @@ README.md             this file
   ice dries it. No tick handlers, block entities or mixins, so it costs nothing until placed.
   Update: bump versions in its gradle.properties, `./gradlew build`, copy
   `build/libs/lavasponge-*.jar` to `pack/mods/lavasponge.jar`, `cd pack && packwiz refresh`.
+- **Our own:** Sleds (both sides; source: github.com/samueldpackard/Sled-Mod, checked out next to
+  this repo). Rideable sleds in 13 wood types (sticks, planks, iron ingots); fast on snow and ice,
+  follow slopes, never sink in powder snow. Optional chest, carpet seat (keeps riders warm) and a
+  harnessed tame wolf that pulls while W is held. Mixins: keeps a harnessed wolf's lead and leg
+  animation, stops leash pathing and in-wall damage for sled riders. Players' guide in PLAYERS.md.
+  Update: bump versions in its gradle.properties, `./gradlew build`, copy
+  `build/libs/sleds-*.jar` to `pack/mods/sleds.jar`, `cd pack && packwiz refresh`.
 
 **Default mod settings** (`pack/config/`, copied from Samuel's own client 2026-11-09): Inventory
 Profiles Next has auto-refill of armor and refill-before-a-tool-breaks off; Jade doesn't show

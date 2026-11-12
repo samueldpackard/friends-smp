@@ -55,6 +55,18 @@ mod updates, so you're always in sync with the server.
 - **Lava sponge** (Samuel's own mod): craft a sponge surrounded by 4 lava buckets (top, left,
   right, bottom). Place it and it soaks up all lava within 7 blocks, and any lava that later
   flows into it, then glows like a lamp. Dry a wet one by crafting it with packed ice.
+- **Sleds** (Samuel's own mod): craft one from any wood type: sticks in the top corners, 3
+  planks across the middle, iron ingots in the bottom corners. Place it on the ground and
+  right-click to ride (2 seats). It glides on snow and ice (faster on ice) and crawls on
+  anything else; W kicks off, S brakes, A/D steer, and hills speed you up. Riders never sink
+  into powder snow.
+  - **Chest:** right-click the sled with a chest; sneak + right-click to open it.
+  - **Carpet:** right-click with any carpet for a coloured seat that keeps riders from freezing.
+    Shears take it off.
+  - **Dog sled:** put a lead on your tame wolf, then sneak + right-click the sled. The wolf
+    jumps into the harness in front. Ride and hold W and it pulls you along, uphill too; let go
+    to coast. Shears on the lead (or making the wolf sit) unhitch it.
+  - Break the sled (punch it) to pick it back up with everything on it.
 - **Shaders (off unless you turn them on):** Options → Video Settings → Shader Packs → pick
   **Complementary Reimagined** (prettier lighting, shadows, water and swaying plants; it still
   looks like Minecraft). Too slow? Its settings have presets from Potato to Ultra. Only one
