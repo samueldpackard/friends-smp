@@ -4,3 +4,6 @@ gateway/dist/
 infra/.terraform/
 infra/*.tfstate*
 infra/.terraform.lock.hcl.bak
+
+# Datapacks shipped in the pack keep their data/ folders (the rule above is for server world data).
+!pack/world/datapacks/*/data/

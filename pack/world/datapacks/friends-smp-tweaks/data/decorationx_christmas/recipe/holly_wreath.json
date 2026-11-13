@@ -1,0 +1,17 @@
+{
+  "category": "misc",
+  "key": {
+    "B": "minecraft:sweet_berries",
+    "L": "minecraft:oak_leaves"
+  },
+  "pattern": [
+    "LLL",
+    "LBL",
+    "LLL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "decorationx_christmas:holly_wreath"
+  },
+  "type": "minecraft:crafting_shaped"
+}
