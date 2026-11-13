@@ -92,7 +92,8 @@ README.md             this file
   Mint crop (from grass). Recipe list in its README. Update: bump its version, `./gradlew build`,
   copy `build/libs/holidayfeast-*.jar` to `pack/mods/holidayfeast.jar`, `cd pack && packwiz refresh`.
 - **Ported:** Snowballing (both sides; Fabric 26.3 port of Olivoz/Snowballing by Lucas Sivars and
-  Seth Chernick, MIT; source in `../Snowballing`, branch `fabric-26.3`, local git only so far).
+  Seth Chernick, MIT; source in `../Snowballing`, branch `fabric-26.3`, published as a public fork
+  at https://github.com/samueldpackard/Snowballing).
   Packed snowballs from snowball piles, villager snowball duels with a duel HUD and emerald gifts
   (a villager duels several opponents at once, each with their own score and gift), the Snow
   Sling. Design and changes in its PORT_NOTES.md. Update: `./gradlew build`, copy
