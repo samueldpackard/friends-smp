@@ -141,6 +141,10 @@ hash = "9b0969e4afbc18124775c008361dc1cfb9a17e49098d93d067b6342a4a54427c"
 metafile = true
 
 [[files]]
+file = "mods/thaw.jar"
+hash = "c103ce57986b390487bd1e568fdeb8be019051ec18892390c16311bd143096ec"
+
+[[files]]
 file = "resourcepacks/clean-connected-glass.pw.toml"
 hash = "da64f35d1f9b3e25fa88b2655595860e7ca1fcb8aeecae265afcb4105bf7c3d6"
 metafile = true
@@ -161,3 +165,155 @@ hash = "0b0124408053dcadec8db31fa54141d901f4d97bd2d3dfb5b28ec3e4c70ad135"
 [[files]]
 file = "world/datapacks/friends-smp-tweaks/pack.mcmeta"
 hash = "3abcd4a2460f4831ea836d7aa7762d170ef65b89343477afdfce3464b216206d"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/badlands.json"
+hash = "006f104a0e645e3d7c596c51990e65cd8c261151f24202d74522ebc1cc5552d5"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/bamboo_jungle.json"
+hash = "677d92daa92152b4908f4c73ae00739dd7916e277497b1e7360cc59741b463fb"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/beach.json"
+hash = "f6656bc610bff662e93a948e3cc7315440a4eb1b3ef6e3a52214834156ec3c0c"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/birch_forest.json"
+hash = "819de02d256b85121ed407f0b308d6dd2160b310002c66c408cd25985be39f36"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/cherry_grove.json"
+hash = "63e6ac4b65a9335533697a565462285ad80ceed869a272acb639bb9c07e4a59a"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/dappled_forest.json"
+hash = "a3aa8c7ac9df50132707f5ad62c467175fd309d29bd87fba4422b13da3a95a9d"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/dark_forest.json"
+hash = "0cb8d6dc99ad93e92f26c4e867615753e289524dc42e17958619f81094527cb3"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/deep_dark.json"
+hash = "ae3f2e08917781e048f4c3ee97845e49b75300d376b6c99161ae71053520df47"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/desert.json"
+hash = "afde2e96860735a06baee2085279e7787765672830405a3e18ba916e3888f5f5"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/dripstone_caves.json"
+hash = "d5cac78612e6b6b130bbba795edaec25fcb7af080b03becd1b169eb75e3c7978"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/eroded_badlands.json"
+hash = "006f104a0e645e3d7c596c51990e65cd8c261151f24202d74522ebc1cc5552d5"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/flower_forest.json"
+hash = "b3018f8c1723fc8f5752640ff21777b3cd139aaa002b6058b924ddc17d050048"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/forest.json"
+hash = "a5f282ed3f4ba331b867d09267438ebd136df2a71b09a4e2ed4bceaeb65c65f9"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/jungle.json"
+hash = "04330d7531e336855c2c54ce34f3aa6ea41c24bb893ed683765b6fa1c0e8baba"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/lush_caves.json"
+hash = "f16ccc6c26d8640a5cb2045eb856e8cf415cca83bc9c86b489450bf263d86c58"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/mangrove_swamp.json"
+hash = "b10ee8c5cba2ac0eda9bcc1301dbb6d2dc0bfa42160e5909ffb6e86cc8edfce1"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/meadow.json"
+hash = "e36d150a695bbea70d0b3a0ffbbe56ceb074d3e2ceb508841c3f3b4d1778bdf3"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/mushroom_fields.json"
+hash = "7cc4ad59d9926db348fec2b1b9ef55bb604eb62226e36d11d3fdff104e59bc10"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/old_growth_birch_forest.json"
+hash = "7bab785e08538a410ad21c53e66fd4cbdb16e2b58afcd3cd6eada5be7481b097"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/old_growth_pine_taiga.json"
+hash = "22ede65485ee0511f9504790bd614d185e16f6554cb5d16ebd417251bc4be0cf"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/old_growth_spruce_taiga.json"
+hash = "1d41a230dec8810aa91115f457df3594f16a5c519f1419a1a43b0e4778cd246e"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/pale_garden.json"
+hash = "4bc1fcaa963a3af76e17b413b4e8abf41a3427a86fef53742f7f9804d34fc3c3"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/plains.json"
+hash = "665fa6428287f37d91ca44c8ed4d6f2b945f8a43c4e04bb3df1557b327d66daf"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/savanna.json"
+hash = "4b579873466793570738028e837935b4f8348a8c069eed13a925c11679831940"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/savanna_plateau.json"
+hash = "c24ad76a6e033a9db2789621b71751113f58c27934fa3b987779cd45d0fb6834"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/sparse_jungle.json"
+hash = "90295e6362e6b6969cd36a3bef3c5b9ce373a8aabc72d5a6b227a634c17305d9"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/stony_peaks.json"
+hash = "c27e4bf3fc98c8ee35105ed662bebb07709fc65953a8a84c17c99a202adf8d2a"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/stony_shore.json"
+hash = "aded6210d5615eda69bd7ae16f0accab86150ce685928dfe8a5a9b89ef59ce01"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/sulfur_caves.json"
+hash = "abe9a722fff77a6313b5391eab0c09d9c668874be5b6531dc05848fc66cd75e3"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/sunflower_plains.json"
+hash = "c55cce5c2796e179d236219a6f0b4708196db97b86c9077f56bba3a27fbc31a3"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/swamp.json"
+hash = "f6ce970dfed170410c4773b91c8670c084d671225178db2d6afdf2ba538a6b47"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/taiga.json"
+hash = "6aec46c194b89e14b993d668dad135bb4a92d1a97f99a1d70cdddb6d9b748684"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/windswept_forest.json"
+hash = "2e328b7479ade525c4b2276d159aa0cb2898e0bfd571e638f413f2560f9cba7a"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/windswept_gravelly_hills.json"
+hash = "7e25e2bed0bf4481c196c4db9300cb11e285776dca86b8ae1fadef3e30eee576"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/windswept_hills.json"
+hash = "7e25e2bed0bf4481c196c4db9300cb11e285776dca86b8ae1fadef3e30eee576"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/windswept_savanna.json"
+hash = "effa74155c411126b1233f3f684e3f550ca3030c43ce0c10f49562381a96e80a"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/data/minecraft/worldgen/biome/wooded_badlands.json"
+hash = "85abdb2fa7ab9903a3a72089a5f1dc823a64315cd35af6ead1fb21ff3bc4ac6a"
+
+[[files]]
+file = "world/datapacks/friends-smp-winter/pack.mcmeta"
+hash = "343cb32cbb90fe301a0ec91caa39789be3593815b5ae0c5b507fa668d3d874a2"
