@@ -79,6 +79,8 @@ mod updates, so you're always in sync with the server.
     gathers snowballs and fights back. Your duels show on the left of the screen with the score.
     Do well and the villager throws you emeralds (more the bigger your win); then it won't duel
     you again for 5 minutes. Villagers only fight where there's snow to make snowballs from.
+    Friends can join in on the same villager: everyone has their own duel with it, with their own
+    score and gift. It throws at whoever is nearest, and throws faster when outnumbered.
   - Throws have a short cooldown (the attack meter under your crosshair).
   - **Snow Sling** (a rare duel prize): right-click a pile with it to load it, then draw it like a
     bow. A full draw flies as far as an arrow and counts as 3 hits.
