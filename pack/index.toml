@@ -30,6 +30,11 @@ hash = "aad07f6496bbf478116eaa0e82fa7fbdd022ca755b392029193e1090d76716b3"
 metafile = true
 
 [[files]]
+file = "mods/decorationx-christmas.pw.toml"
+hash = "390f642f2543bfd16c79e73e81bea01585f819d40b2a456f4ed953ef3e03c13f"
+metafile = true
+
+[[files]]
 file = "mods/entityculling.pw.toml"
 hash = "29f920b8bdac98a1a1d9e6454d0c3b4d0eb1f3779f2fea7b7df177b2163e5d61"
 metafile = true
@@ -48,6 +53,10 @@ metafile = true
 file = "mods/ferrite-core.pw.toml"
 hash = "069d81cab53c0141459ad4d70bcf3e10f17652f24cc62d3b4a0fc2cd2b700871"
 metafile = true
+
+[[files]]
+file = "mods/holidayfeast.jar"
+hash = "b0be52bd910addc30bec8bf1f34fdba2fd009c502dc1fed931fdfe23e716bfac"
 
 [[files]]
 file = "mods/immediatelyfast.pw.toml"
@@ -94,6 +103,11 @@ hash = "b44f3ab71e52f1aaae97cf8644f2316042de8b7777d6b6794567c8c7d220bd2b"
 metafile = true
 
 [[files]]
+file = "mods/macaws-holidays.pw.toml"
+hash = "59ad293d3603acd564aa6bff0dfcddf221562b56ffe0c2d0636781aafad9fc8b"
+metafile = true
+
+[[files]]
 file = "mods/modmenu.pw.toml"
 hash = "cd05db76d670773ace1184abdd46126e7b7c75c2b70da82e1764cff9544c4269"
 metafile = true
@@ -111,6 +125,10 @@ metafile = true
 [[files]]
 file = "mods/sleds.jar"
 hash = "2a0554e597a9b5c1f497f97b3106c6aaa6a55da48f309860baeaf2abecc1023d"
+
+[[files]]
+file = "mods/snowballing.jar"
+hash = "967305c48010dfbca8114eeb5e8300faf8a1b8de61326b0e6fa09c3cb0580af0"
 
 [[files]]
 file = "mods/sodium.pw.toml"
@@ -131,3 +149,15 @@ metafile = true
 file = "shaderpacks/complementary-reimagined.pw.toml"
 hash = "75d1d2488a0c332a9a58af7e57f980a1b006c02b3a1c580fbd50443088e4eab0"
 metafile = true
+
+[[files]]
+file = "world/datapacks/friends-smp-tweaks/README.md"
+hash = "32f4b17c824af5ddbaf0544edc02e0ded971a680b5b293cd088f203dc49fc539"
+
+[[files]]
+file = "world/datapacks/friends-smp-tweaks/data/decorationx_christmas/recipe/holly_wreath.json"
+hash = "0b0124408053dcadec8db31fa54141d901f4d97bd2d3dfb5b28ec3e4c70ad135"
+
+[[files]]
+file = "world/datapacks/friends-smp-tweaks/pack.mcmeta"
+hash = "3abcd4a2460f4831ea836d7aa7762d170ef65b89343477afdfce3464b216206d"

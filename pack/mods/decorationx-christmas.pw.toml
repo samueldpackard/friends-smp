@@ -1,0 +1,13 @@
+name = "DecorationX: Christmas"
+filename = "decorationx_christmas-1.0.2+fabric-26.3.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/7COzXwtc/versions/WQYA7oab/decorationx_christmas-1.0.2%2Bfabric-26.3.jar"
+hash-format = "sha512"
+hash = "4f080892464cf785b1248af2a411edbfb5f6aab2bb83063fa39e8318aaf44eb6ed02c2d20c7f2998827533abaadbbacd82dddb883da5ed6f67e0795c28492891"
+
+[update]
+[update.modrinth]
+mod-id = "7COzXwtc"
+version = "WQYA7oab"

@@ -86,6 +86,22 @@ README.md             this file
   animation, stops leash pathing and in-wall damage for sled riders. Players' guide in PLAYERS.md.
   Update: bump versions in its gradle.properties, `./gradlew build`, copy
   `build/libs/sleds-*.jar` to `pack/mods/sleds.jar`, `cd pack && packwiz refresh`.
+- **Our own:** Holiday Feast (both sides; source: github.com/samueldpackard/Holiday-Feast, checked
+  out next to this repo). Edible holiday food from vanilla ingredients: gingerbread cookies, hot
+  cocoa, eggnog, peppermint candy canes, fruitcake, mince pie, peppermint bark, roast ham, plus a
+  Mint crop (from grass). Recipe list in its README. Update: bump its version, `./gradlew build`,
+  copy `build/libs/holidayfeast-*.jar` to `pack/mods/holidayfeast.jar`, `cd pack && packwiz refresh`.
+- **Ported:** Snowballing (both sides; Fabric 26.3 port of Olivoz/Snowballing by Lucas Sivars and
+  Seth Chernick, MIT; source in `../Snowballing`, branch `fabric-26.3`, local git only so far).
+  Packed snowballs from snowball piles, villager snowball duels with a duel HUD and emerald gifts,
+  the Snow Sling. Design and changes in its PORT_NOTES.md. Update: `./gradlew build`, copy
+  `build/libs/snowballing-*.jar` to `pack/mods/snowballing.jar`, `cd pack && packwiz refresh`.
+- **Holiday decorations:** Macaw's Holidays and DecorationX: Christmas (both sides, Modrinth/CurseForge
+  `.pw.toml`s). Decorative only, except DecorationX's snowman mobs and snowball launchers.
+- **Server datapack** `pack/world/datapacks/friends-smp-tweaks/` (packwiz installs it into the
+  server's `world/datapacks/`; launchers also download it but never load it): DecorationX's Holly
+  Wreath is crafted with sweet berries, because its original recipe was identical to Macaw's Red Oak
+  Leaves. See its README.
 
 **Default mod settings** (`pack/config/`, copied from Samuel's own client 2026-11-09): Inventory
 Profiles Next has auto-refill of armor and refill-before-a-tool-breaks off; Jade doesn't show

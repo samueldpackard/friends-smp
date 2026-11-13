@@ -67,6 +67,24 @@ mod updates, so you're always in sync with the server.
     jumps into the harness in front. Ride and hold W and it pulls you along, uphill too; let go
     to coast. Shears on the lead (or making the wolf sit) unhitch it.
   - Break the sled (punch it) to pick it back up with everything on it.
+- **Holiday food** (Samuel's own mod, Holiday Feast): gingerbread cookies, hot cocoa, eggnog,
+  peppermint candy canes, fruitcake, mince pie, peppermint bark and roast ham. The recipe book
+  shows each one once you pick up an ingredient. Mint Leaves sometimes drop when you break grass;
+  plant them on farmland.
+- **Snowball fights** (Snowballing):
+  - **Packed Snowball Piles:** right-click a single layer of snow with a shovel to make a pile, and
+    keep shoveling to add snowballs (up to 6). Right-click a snowball with an empty hand to take
+    that one as a **Packed Snowball**. Sneak + right-click with one to put it back.
+  - **Villager duels:** hit a villager with a Packed Snowball (regular snowballs don't count) and it
+    gathers snowballs and fights back. Your duels show on the left of the screen with the score.
+    Do well and the villager throws you emeralds (more the bigger your win); then it won't duel
+    you again for 5 minutes. Villagers only fight where there's snow to make snowballs from.
+  - Throws have a short cooldown (the attack meter under your crosshair).
+  - **Snow Sling** (a rare duel prize): right-click a pile with it to load it, then draw it like a
+    bow. A full draw flies as far as an arrow and counts as 3 hits.
+- **Holiday decorations:** Macaw's Holidays and DecorationX: Christmas add hundreds of Christmas
+  blocks (trees, lights, presents, fireplaces, snowmen) in the creative menu and recipe book.
+  DecorationX's snowmen can also come to life: see their tooltips.
 - **Shaders (off unless you turn them on):** Options → Video Settings → Shader Packs → pick
   **Complementary Reimagined** (prettier lighting, shadows, water and swaying plants; it still
   looks like Minecraft). Too slow? Its settings have presets from Potato to Ultra. Only one
