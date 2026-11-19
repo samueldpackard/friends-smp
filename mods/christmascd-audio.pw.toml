@@ -1,0 +1,8 @@
+name = "Christmas Album (audio)"
+filename = "christmascd-audio.jar"
+side = "client"
+
+[download]
+url = "https://friends-smp-media-829135570053.s3.us-west-2.amazonaws.com/christmascd/cbb030919af7ef2f38371d0cfe5cb479e3370bfff24d91de/christmascd-audio-1.1.0.jar"
+hash-format = "sha256"
+hash = "926d469f1cf4c0470f1fe60725e169623b91b165858b26061165baa95a1c734e"
